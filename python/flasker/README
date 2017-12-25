@@ -1,0 +1,19 @@
+
+      2. initialize the database with this command:
+
+         flask --app=flasker initdb
+
+      3. now you can run flaskr:
+
+         flask --app=flasker run
+like:
+
+flask --app=flasker run -h 0.0.0.0 -p 5006
+
+         the application will greet you on
+         http://localhost:5000/
+
+
+alias startflasker='nohup uwsgi -d /var/log/uwsgi.log --ini /home/webapp/flasker/uwsgi_conf.ini &'
+
+##可以去nginx结合，nginx配置为代理模式

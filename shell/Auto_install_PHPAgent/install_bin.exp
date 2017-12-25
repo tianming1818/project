@@ -1,0 +1,26 @@
+#!/usr/bin/expect
+
+#receive param : install / uninstalls
+set timeout 30
+set ops [lindex $argv 0]
+set ver [lindex $argv 1]
+set platform [exec uname -i]
+#send {echo $ops}
+if {$ops == "install"} {
+	cd /SpyTest/PHP/Compatibility/PHP_Runtime/Agent/$ver/debug/ 
+	spawn ./tingyun-agent-php-$ver.$platform.bin
+	expect "exit"
+	send "1\n"
+	expect "license key" 
+		send "888-888-888\n"
+	expect "website" 
+		send "svt_php_leak\r\n"
+	expect eof
+}
+if {$ops == "uninstall"} {
+	cd /SpyTest/PHP/Compatibility/PHP_Runtime/Agent/$ver/debug/
+	spawn ./tingyun-agent-php-$ver.$platform.bin
+	expect "Exit"
+        	send "2\r\n"
+	expect eof
+}

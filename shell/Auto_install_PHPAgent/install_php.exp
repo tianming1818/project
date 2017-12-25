@@ -1,0 +1,24 @@
+#!/usr/bin/expect
+
+#receive param : install / uninstalls
+set timeout 30
+set ops [lindex $argv 0]
+#send {echo $ops}
+if {$ops == "install"} {
+	spawn networkbench-install.sh
+	expect "exit"
+	send "1\n"
+	expect "license key" 
+		send "888-888-888\n"
+	expect "website" 
+		send "svt_php_leak\r\n"
+
+	expect eof
+}
+if {$ops == "uninstall"} {
+	spawn networkbench-install.sh;
+	expect "Exit"
+        	send "2\r\n"
+
+	expect eof
+}

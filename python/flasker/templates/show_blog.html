@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+</head>
+
+<form action="/add" method="post">
+      <dl>
+        <dt>Title:
+        <dd><input type="text" size="30" name="title">
+        <dt>Text:
+        <dd><textarea name="text" rows="5" cols="40"></textarea>
+        <dd><input type="submit" value="Share">
+      </dl>
+    </form>
+
+
+<!--<p>{{ entries }}</p> -->
+
+{% for line in entries %}
+<h2>标题</h2>
+<li>{{line[0]}}</li>
+<hr width="1400" size="3" color="block"> 
+<h2>博文</h2>
+<li>{{line[1]}}</li>
+<hr width="1400" size="3" color="green"> 
+<h2>删除博文</h2>
+<form action="/del" method="post"> 
+<input name="title" value={{line[0]}}>
+<input type="submit" value="del">
+</form>
+<hr width="1400" size="3" color="red"> 
+
+<h2>修改博文</h2>
+<form action="/modify" method="post">
+<input name="title" value={{line[0]}}>
+<textarea name="text" rows="5" cols="40"></textarea>
+<input type="submit" value="modify">
+</form>
+
+{% endfor %}
+
+<hr width="1400" size="10" color="block"> 
+
+<p align="center"><font size="6">==========================Redis add del select============================</font></p> 
+<form action="/add_redis" method="post">
+      <dl>
+        <dt>KEYS:
+        <dd><input type="text" size="30" name="title">
+        <dt>VALUE:
+        <dd><input type="text" name="text" size="30">
+        <dd><input type="submit" value="Share">
+      </dl>
+    </form>
+
+<a>KEYS:</a>
+{% for key in k %}
+<li>{{ key }}</li>
+<h2>删除KEYS</h2>
+<form action="/del_redis" method="post">
+<input name="title" value={{ key }}>
+<input type="submit" value="del">
+</form>
+{% endfor %}
+<a>VALUE:</a>
+{% for value in v %}
+<li>{{ value }}</li>
+{% endfor %}
+
+</html>
+
+
